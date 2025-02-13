@@ -268,11 +268,11 @@ def practice_mode():
 
         total_combos = 0
         for hand in range_hands:
-            total_combos+=hand.combo_count
+            total_combos += hand.combo_count
 
         combos = 0
         for hand in results:
-            combos+=hand.combo_count
+            combos += hand.combo_count
         print("\n=== 検索結果 ===")
         # 検索結果に色をつけて表示（背景色反転）
         colored_results = []
@@ -288,10 +288,35 @@ def practice_mode():
             else "該当するハンドはありません。"
         )
         print()
-        print(f"コンボ数: {combos} / {total_combos} = {round(100*combos/total_combos)} %")
+        print(
+            f"コンボ数: {combos} / {total_combos} = {round(100*combos/total_combos)} %"
+        )
         print("================")
         print()
 
 
+def check_total_combos():
+    hand_range = HandRange()
+    colors = [
+        HandColor.PURPLE,
+        HandColor.WHITE,
+        HandColor.BLUE,
+        HandColor.GREEN,
+        HandColor.YELLOW,
+        HandColor.RED,
+        HandColor.NAVY,
+    ]
+
+    for color in colors:
+        range_hands = hand_range.query(
+            color={color},
+        )
+        total_combos = 0
+        for hand in range_hands:
+            total_combos += hand.combo_count
+        print(f"{color.name} : {total_combos}")
+
+
 # 実行
-practice_mode()
+# practice_mode()
+check_total_combos()
